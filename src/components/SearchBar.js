@@ -1,15 +1,24 @@
 import React, { Component } from 'react';
 
 class SearchBar extends Component {
+
+    state ={ term: '' };
+
+    onInputChange = (event) => {
+        this.setState({ term: event.target.value })
+    }
+
     render() {
         return (
             <div className="search-bar ui segment">
                 <form className="ui form">
                     <div className="ui form">
-                        <label>
-                            Video Search
-                        </label>
-                        <input type="text" />
+                        <label>Video Search</label>
+                        <input
+                            type="text"
+                            value={this.state.term}
+                            onChange={this.onInputChange}
+                        />
                     </div>
                 </form>
             </div>
