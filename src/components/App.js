@@ -11,6 +11,10 @@ class App extends Component {
         selectedVideo: null
     };
 
+    componentDidMount() {
+        this.onTermSubmit('puppies');
+    }
+
     onTermSubmit = async (term) => {
         const response = await youtube.get('/search', {
             params: {
@@ -18,7 +22,11 @@ class App extends Component {
             }
         });
 
-        this.setState({ videos: response.data.items });
+        this.setState({
+            videos: response.data.items,
+            // by default, video displayed will be the first video item
+            selectedVideo: response.data.items[0]
+        });
     };
 
     /*
@@ -35,8 +43,6 @@ class App extends Component {
         return (
             <div className="ui contain">
                 <SearchBar onFormSubmit={this.onTermSubmit} />
-
-
                 <div className="ui grid">
                     <div className="ui row">
                         <div className="eleven wide column">
